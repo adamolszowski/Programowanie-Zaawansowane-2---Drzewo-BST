@@ -129,6 +129,10 @@
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PLIKI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PLIKI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST.h" />
