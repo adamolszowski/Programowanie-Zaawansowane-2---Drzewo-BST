@@ -188,3 +188,58 @@ void BST::printPostOrder() const {
 	printingPostOrder::run(root);
 	cout << endl;
 }
+
+void BST::drawTree() const {
+	struct drawingTree {
+		static void go(const Node* node, int indent) {
+			if (!node) { // jesli nie ma korzenia to wychodzimy
+				return;
+			}
+
+			go(node->right, indent + 4); //prawe poddrzewo
+
+			for (int i = 0; i < indent; ++i) {
+				cout << " "; //wciêcie - 4 spacje
+			}
+
+			cout << node->value << endl; // wêze³ „poœrodku” dwóch wywo³añ
+
+			go(node->left, indent + 4); //lewe poddrzewo
+		}
+	};
+
+	drawingTree::go(root, 3); //zaczynamy od roota i zerowym wcieciem - z 3 spacjami odstepu od lewej na start
+}
+
+bool BST::findPath(int value) const {
+	vector<int> path;
+	const Node* current = root; // zaczynamy od roota
+
+	while (current) {
+		path.push_back(current->value); // dodajemy na koniec wektora
+		if (value == current->value) { // znalezione, przerywamy szukanie
+			break;
+		}
+		current = (value < current->value) ? current->left : current->right;
+		// jak szukana wartosc mniejsza niz obecny element to idziemy w lewo
+		// w przeciwnym razie w prawo
+	}
+
+	if (!current) // nie ma takiego elementu
+	{
+		cout << "Nie istnieje" << endl;
+		return false;
+	}
+
+	for (int i = 0; i < path.size(); i++) //wypisywanie sciezki
+	{
+		cout << path[i];
+		if (i + 1 < path.size()) // jesli wiecej niz jeden element do dodajemy strzalki
+		{
+			cout << " -> ";
+		}
+	}
+
+	cout << endl;
+	return true;
+}
