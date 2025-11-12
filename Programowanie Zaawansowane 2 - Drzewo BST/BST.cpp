@@ -135,3 +135,56 @@ BST::~BST() {
 	clear();
 }
 
+void BST::printPreOrder() const {
+	// Preorder (korzeñ -> lewo -> prawo)
+	struct printingPreOrder {
+		static void run(const Node* node) {
+			if (!node) {
+				return;
+			}
+
+			cout << node->value << " ";
+			run(node->left);
+			run(node->right);
+		}
+	};
+
+	printingPreOrder::run(root);
+	cout << endl;
+}
+
+void BST::printInOrder() const {
+	// Inorder (lewo -> korzeñ -> prawo) wypisze wartoœci rosn¹co
+	struct printingInOrder {
+		static void run(const Node* node) {
+			if (!node) {
+				return;
+			}
+
+			run(node->left);
+			cout << node->value << " ";
+			run(node->right);
+		}
+	};
+
+	printingInOrder::run(root);
+	cout << endl;
+}
+
+void BST::printPostOrder() const {
+	// Postorder (lewo -> prawo -> korzeñ)
+	struct printingPostOrder {
+		static void run(const Node* node) {
+			if (!node) {
+				return;
+			}
+
+			run(node->left);
+			run(node->right);
+			cout << node->value << " ";
+		}
+	};
+
+	printingPostOrder::run(root);
+	cout << endl;
+}
