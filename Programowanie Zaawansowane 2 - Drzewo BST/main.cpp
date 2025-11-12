@@ -30,7 +30,7 @@ int main() {
         switch (userSelection) {
         case 1:
             int elementToInsert;
-            cout << "Wpisz wartosc elementu do wstawienia: ";
+            cout << "Wartosc elementu do wstawienia: ";
             cin >> elementToInsert;
 
             if (tree.insert(elementToInsert))
@@ -52,7 +52,7 @@ int main() {
                 cout << "Udalo sie usunac element " << elementToRemove << endl;
             }
             else {
-                cout << "Usuwanie nie powiodlo sie";
+                cout << "Blad";
             }
 
             break;
@@ -63,7 +63,7 @@ int main() {
 
         case 4:
             int element;
-            cout << "Wpisz wartosc szukanego elementu: ";
+            cout << "Wpisz wartosc:";
             cin >> element;
             tree.findPath(element);
             break;
@@ -90,7 +90,7 @@ int main() {
             break;
 
         case 8: {
-            cout << "\nPodaj sciezke pliku txt do wczytania: \n";
+            cout << "\nSciezka:\n";
             string filePath;
             cin >> filePath;
             PLIKI::wczytajTxt(tree, filePath);
@@ -109,7 +109,7 @@ int main() {
         }
 
         case 10: {
-            cout << "\nPodaj sciezke pliku BIN do wczytania: ";
+            cout << "\Sciezka: ";
             string filePath;
             cin >> filePath;
             if (PLIKI::wczytajBinarnie(tree, filePath))
@@ -131,7 +131,7 @@ int main() {
         }
 
         case 12:
-            cout << "wybrales 12" << endl;
+            cout << "--------------------" << endl;
             programRunning = false;
             break;
         }
