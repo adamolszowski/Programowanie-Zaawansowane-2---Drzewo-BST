@@ -77,3 +77,19 @@ bool PLIKI::zapiszBinarnie(const BST& tree, const std::string& filepath) {
 	W::run(tree.root, out);
 	return true;
 }
+
+bool PLIKI::wczytajBinarnie(BST& tree, const std::string& filepath) {
+	std::ifstream in(filepath, std::ios::binary);
+	if (!in) {
+		return false;
+	}
+
+	int v;
+	while (in.read(reinterpret_cast<char*>(&v), sizeof(v))) { //wczytuj dopoki udaje sie 
+		//odczytywac wszystkie bajty danej liczby do v
+		//traktujemy ten adres (&v) jak wskaznik na ciag bajtow, 
+		// dzieku temu read kopiuje do v te bajty
+		tree.insert(v);  // dopisuje do istniej¹cego drzewa z uzyciem metody klasy BST
+	}
+	return true;
+}
