@@ -51,3 +51,29 @@ bool PLIKI::zapiszTxt(const BST& tree, const std::string& filepath) {
 	return true;
 }
 
+bool PLIKI::zapiszBinarnie(const BST& tree, const std::string& filepath) {
+	std::ofstream out(filepath, std::ios::binary);
+	if (!out) {
+		return false;
+	}
+
+	struct W {
+		static void run(const BST::Node* node, std::ofstream& out) {
+			if (!node) {
+				return;
+			}
+
+			int v = node->value; // dzialanie jak preorder
+			out.write(reinterpret_cast<const char*>(&v), sizeof(v)); //zapisujemy wszystkie bajty 
+			//które s¹ pod adresem na który
+			//wskazuje &v, reinterpret_cast pozwala patrzec na to co wskazuje 
+			// &v jak tablice bajtow, traktujemy pamiec v jako ciag bajtow
+			//aby write moglo to zapisac
+			run(node->left, out); // dzialanie jak preorder
+			run(node->right, out); // dzialanie jak preorder
+		}
+	};
+
+	W::run(tree.root, out);
+	return true;
+}
